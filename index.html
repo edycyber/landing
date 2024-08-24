@@ -1,112 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <base href="https://meta.appstore.virtual/">
     <meta charset="UTF-8">
     <title>Metaverse App Marketplace with Calm Music</title>
     <style>
-        body {
+        body, html {
             margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
             overflow: hidden;
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            background: #000;
         }
-
         #scene-container {
             width: 100%;
-            height: 100vh;
-            display: block;
+            height: 100%;
         }
-
         .ui-panel {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 15px;
             border-radius: 10px;
-            z-index: 100;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
-
-        .ui-panel h2 {
-            margin: 0 0 10px 0;
-        }
-
-        .app-info,
-        .store-info {
+        .app-info, .store-info {
+            display: none;
             position: absolute;
-            bottom: 10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            z-index: 100;
-            display: none;
-        }
-
-        .btn {
-            background-color: #008CBA;
-            border: none;
-            color: white;
-            padding: 10px 20px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        #buttons-panel {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: #222;
+            color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #sponsors-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sponsors-list li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        #navigation-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
+        #discord-widget {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+        #eastland-substack {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        #music-controls {
+            position: absolute;
+            top: 20px;
+            right: 340px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 10px;
             border-radius: 5px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 </head>
-<body onload="init()">
-<div id="scene-container"></div>
-<div class="ui-panel">
-    <h2>Metaverse App Marketplace</h2>
-    <p>Explore the futuristic city, visit stores, and discover new apps!</p>
-</div>
-<div class="app-info">
-    <h2 id="app-name"></h2>
-    <p id="app-description"></p>
-    <p id="app-price"></p>
-    <button class="btn" id="add-to-cart-btn" onclick="window.location.href='https://meta.appstore.virtual/cart/app1'">Add to Cart</button>
-</div>
-<div class="store-info">
-    <h2 id="store-name"></h2>
-    <p id="store-description"></p>
-    <button class="btn" id="buy-btn" onclick="window.location.href='https://meta.appstore.virtual/store1'">Buy</button>
-</div>
-<script>
-    let scene, camera, renderer;
+<body>
+    <div id="scene-container"></div>
+    <div class="ui-panel">
+        <h2>Metaverse App Marketplace</h2>
+        <p>Explore the futuristic city, visit stores, and discover new apps!</p>
+    </div>
+    <div class="app-info">
+        <h2 id="app-name"></h2>
+        <p id="app-description"></p>
+        <p id="app-price"></p>
+        <button class="btn" onclick="addToCart()">Add to Cart</button>
+    </div>
+    <div class="store-info">
+        <h2 id="store-name"></h2>
+        <p id="store-description"></p>
+        <button class="btn" onclick="openStoreModal()">Enter Store</button>
+    </div>
+    <div id="buttons-panel">
+        <button class="btn" onclick="window.location.href='https://example.com/register'">Register</button>
+        <button class="btn" onclick="window.location.href='https://example.com/sponsors'">City Sponsors</button>
+        <button class="btn" onclick="window.location.href='https://example.com/entertainment'">Entertainment</button>
+        <button class="btn" onclick="toggleDiscord()">Toggle Discord</button>
+    </div>
+    <div id="navigation-controls">
+        <button class="nav-btn" id="move-forward">⬆</button>
+        <div>
+            <button class="nav-btn" id="move-left">⬅</button>
+            <button class="nav-btn" id="move-right">➡</button>
+        </div>
+        <button class="nav-btn" id="move-backward">⬇</button>
+    </div>
 
-    function init() {
-        // Scene setup
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('scene-container').appendChild(renderer.domElement);
+    <div id="sponsorsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sponsorsModal')">&times;</span>
+            <h2>City Sponsors and Marketplaces</h2>
+            <ul id="sponsors-list"></ul>
+        </div>
+    </div>
 
-        // Example geometry
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-        camera.position.z = 5;
+    <div id="storeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('storeModal')">&times;</span>
+            <h2 id="store-modal-name"></h2>
+            <ul id="store-items"></ul>
+        </div>
+    </div>
 
-        // Rendering loop
+    <iframe id="discord-widget" src="https://discord.com/widget?id=YOUR_DISCORD_SERVER_ID&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="display: none;"></iframe>
+
+    <div id="eastland-substack">
+        <iframe src="https://eastland.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <div id="music-controls">
+        <button onclick="toggleMusic()">Toggle Music</button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5" onchange="setVolume(this.value)">
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="https://example.com/calm-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let scene, camera, renderer, raycaster, mouse;
+        let appIcons = [];
+        let storeBuildings = [];
+        let selectedApp = null;
+        let selectedStore = null;
+        let people = [];
+        let adScreens = [];
+        let userControls = { moveForward: false, moveBackward: false, moveLeft: false, moveRight: false };
+        let userSpeed = 0.5;
+        let isSpinning = false;
+        let spinningTween;
+        let backgroundMusic;
+        let isMusicPlaying = false;
+
+        const apps = [
+            { name: "VirtualMeet", description: "Host virtual meetings in stunning 3D environments", price: 9.99, logo: "🤝" },
+            { name: "MetaFit", description: "A complete fitness suite for the metaverse", price: 14.99, logo: "💪" },
+            { name: "CryptoShop", description: "Buy and sell virtual goods using cryptocurrency", price: 0, logo: "🛒" },
+        ];
+
+        const stores = [
+            { name: "AppWorld", description: "The best place to find new apps" },
+            { name: "GameZone", description: "Explore and buy the latest metaverse games" },
+            { name: "FashionHub", description: "Upgrade your avatar's style with the latest trends" },
+        ];
+
+        init();
+        animate();
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById("scene-container").appendChild(renderer.domElement);
+
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            backgroundMusic = document.getElementById("background-music");
+
+            window.addEventListener("resize", onWindowResize, false);
+            window.addEventListener("mousemove", onMouseMove, false);
+            window.addEventListener("mousedown", onMouseDown, false);
+
+            addLighting();
+            createCity();
+            addPeople();
+            addAppIcons();
+            addStoreBuildings();
+            addAdScreens();
+
+            document.getElementById("move-forward").addEventListener("mousedown", () => userControls.moveForward = true);
+            document.getElementById("move-forward").addEventListener("mouseup", () => userControls.moveForward = false);
+            document.getElementById("move-backward").addEventListener("mousedown", () => userControls.moveBackward = true);
+            document.getElementById("move-backward").addEventListener("mouseup", () => userControls.moveBackward = false);
+            document.getElementById("move-left").addEventListener("mousedown", () => userControls.moveLeft = true);
+            document.getElementById("move-left").addEventListener("mouseup", () => userControls.moveLeft = false);
+            document.getElementById("move-right").addEventListener("mousedown", () => userControls.moveRight = true);
+            document.getElementById("move-right").addEventListener("mouseup", () => userControls.moveRight = false);
+        }
+
+        function addLighting() {
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 10, 7.5);
+            scene.add(light);
+        }
+
+        function createCity() {
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+        }
+
+        function addPeople() {
+            const geometry = new THREE.SphereGeometry(0.2, 32, 32);
+            const material = new THREE.MeshBasicMaterial({ color: 0x2194ce });
+            for (let i = 0; i < 10; i++) {
+                const person = new THREE.Mesh(geometry, material);
+                person.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+                scene.add(person);
+                people.push(person);
+            }
+        }
+
+        function addAppIcons() {
+            apps.forEach((app, index) => {
+                const geometry = new THREE.CircleGeometry(0.5, 32);
+                const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                const icon = new THREE.Mesh(geometry, material);
+                icon.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+                icon.userData = { type: "app", appData: app };
+                scene.add(icon);
+                appIcons.push(icon);
+            });
+        }
+
+        function addStoreBuildings() {
+            stores.forEach((store, index) => {
+                const geometry = new THREE.BoxGeometry(1, 1, 1);
+                const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+                const building = new THREE.Mesh(geometry, material);
+                building.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+                building.userData = { type: "store", storeData: store };
+                scene.add(building);
+                storeBuildings.push(building);
+            });
+        }
+
+        function addAdScreens() {
+            const geometry = new THREE.PlaneGeometry(2, 1);
+            const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+            const screen = new THREE.Mesh(geometry, material);
+            screen.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+            scene.add(screen);
+            adScreens.push(screen);
+        }
+
+        function onMouseMove(event) {
+            event.preventDefault();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function onMouseDown(event) {
+            event.preventDefault();
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            if (intersects.length > 0) {
+                const clickedObject = intersects[0].object;
+                if (clickedObject.userData.type === "app") {
+                    openAppInfo(clickedObject.userData.appData);
+                } else if (clickedObject.userData.type === "store") {
+                    openStoreInfo(clickedObject.userData.storeData);
+                }
+            }
+        }
+
+        function openAppInfo(appData) {
+            selectedApp = appData;
+            document.getElementById("app-name").innerText = appData.name;
+            document.getElementById("app-description").innerText = appData.description;
+            document.getElementById("app-price").innerText = `$${appData.price}`;
+            document.querySelector(".app-info").style.display = "block";
+        }
+
+        function openStoreInfo(storeData) {
+            selectedStore = storeData;
+            document.getElementById("store-name").innerText = storeData.name;
+            document.getElementById("store-description").innerText = storeData.description;
+            document.querySelector(".store-info").style.display = "block";
+        }
+
+        function addToCart() {
+            alert(`Added ${selectedApp.name} to cart!`);
+            closeAppInfo();
+        }
+
+        function openStoreModal() {
+            document.getElementById("store-modal-name").innerText = selectedStore.name;
+            document.getElementById("storeModal").style.display = "block";
+        }
+
+        function closeAppInfo() {
+            document.querySelector(".app-info").style.display = "none";
+        }
+
+        function closeStoreInfo() {
+            document.querySelector(".store-info").style.display = "none";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function toggleDiscord() {
+            const discordWidget = document.getElementById("discord-widget");
+            discordWidget.style.display = discordWidget.style.display === "none" ? "block" : "none";
+        }
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+            } else {
+                backgroundMusic.play();
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        function setVolume(value) {
+            backgroundMusic.volume = value;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
         function animate() {
             requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+
+            if (userControls.moveForward) camera.position.z -= userSpeed;
+            if (userControls.moveBackward) camera.position.z += userSpeed;
+            if (userControls.moveLeft) camera.position.x -= userSpeed;
+            if (userControls.moveRight) camera.position.x += userSpeed;
+
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects(scene.children);
+            scene.children.forEach(child => {
+                if (intersects.length > 0 && child === intersects[0].object) {
+                    child.material.color.set(0xff0000);
+                } else {
+                    if (child.userData.type === "app") {
+                        child.material.color.set(0xff0000);
+                    } else if (child.userData.type === "store") {
+                        child.material.color.set(0x0000ff);
+                    } else {
+                        child.material.color.set(0xffff00);
+                    }
+                }
+            });
+
             renderer.render(scene, camera);
         }
-        animate();
-    }
-</script>
+    </script>
 </body>
 </html>
+
