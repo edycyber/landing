@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metaverse App Marketplace</title>
+    <style>
+        /* Existing styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* New styles for buttons */
+        button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="scene-container"></div>
+
+    <div class="ui-panel">
+        <h2>Metaverse App Marketplace</h2>
+        <p>Explore the futuristic city, visit stores, and discover new apps!</p>
+    </div>
+
+    <div class="app-info">
+        <h2 id="app-name"></h2>
+        <button onclick="addToCart(this)" data-url="">Add to Cart</button>
+        <button onclick="buyApp(this)" data-url="">Buy</button>
+    </div>
+
+    <div class="store-info">
+        <h2 id="store-name"></h2>
+        <button onclick="enterStore()">Enter Store</button>
+        <button onclick="openAboutUs()">About Us</button>
+    </div>
+
+    <div id="buttons-panel">
+        <button onclick="register()">Register</button>
+        <button onclick="openModal('sponsorsModal')">City Sponsors</button>
+        <button onclick="openEntertainment()">Entertainment</button>
+        <button onclick="toggleDiscord()">Toggle Discord</button>
+    </div>
+
+    <div id="navigation-controls">
+        <button onclick="moveUp()">⬆</button>
+        <div>
+            <button onclick="moveLeft()">⬅</button>
+            <button onclick="moveRight()">➡</button>
+        </div>
+        <button onclick="moveDown()">⬇</button>
+    </div>
+
+    <div id="sponsorsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sponsorsModal')">&times;</span>
+            <h2>City Sponsors and Marketplaces</h2>
+            <!-- Sponsor content here -->
+        </div>
+    </div>
+
+    <div id="storeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('storeModal')">&times;</span>
+            <h2 id="store-modal-name"></h2>
+            <!-- Store content here -->
+        </div>
+    </div>
+
+    <div id="aboutUsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aboutUsModal')">&times;</span>
+            <h2>About Us</h2>
+            <p id="aboutUsContent"></p>
+        </div>
+    </div>
+
+    <div id="eastland-substack"></div>
+
+    <div id="music-controls">
+        <button onclick="toggleMusic()">Toggle Music</button>
+    </div>
+
+    <audio id="backgroundMusic">
+        <source src="path/to/your/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function addToCart(button) {
+            const url = button.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            } else {
+                console.error('No URL specified for Add to Cart');
+            }
+        }
+
+        function buyApp(button) {
+            const url = button.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            } else {
+                console.error('No URL specified for Buy');
+            }
+        }
+
+        function enterStore() {
+            const storeName = document.getElementById('store-name').textContent;
+            const storeModalName = document.getElementById('store-modal-name');
+            storeModalName.textContent = storeName;
+            openModal('storeModal');
+        }
+
+        function openAboutUs() {
+            const storeName = document.getElementById('store-name').textContent;
+            const aboutUsContent = document.getElementById('aboutUsContent');
+            aboutUsContent.textContent = `Welcome to ${storeName}! We are a leading provider of innovative apps and digital experiences in the Metaverse. Our mission is to enhance your virtual life with cutting-edge technology and unparalleled creativity.`;
+            openModal('aboutUsModal');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function register() {
+            window.location.href = 'https://example.com/register';
+        }
+
+        function openEntertainment() {
+            window.location.href = 'https://example.com/entertainment';
+        }
+
+        function toggleDiscord() {
+            console.log('Discord toggled');
+            // Add Discord toggle functionality here
+        }
+
+        function moveUp() {
+            console.log('Moving up');
+            // Add movement functionality here
+        }
+
+        function moveLeft() {
+            console.log('Moving left');
+            // Add movement functionality here
+        }
+
+        function moveRight() {
+            console.log('Moving right');
+            // Add movement functionality here
+        }
+
+        function moveDown() {
+            console.log('Moving down');
+            // Add movement functionality here
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('backgroundMusic');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Close modals when clicking outside of them
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Function to set up the page with dynamic content
+        function setupPage() {
+            const apps = [
+                { name: "VR Chat", addToCartUrl: "https://example.com/cart/vrchat", buyUrl: "https://example.com/buy/vrchat" },
+                { name: "Metaverse Explorer", addToCartUrl: "https://example.com/cart/explorer", buyUrl: "https://example.com/buy/explorer" },
+                // Add more apps as needed
+            ];
+
+            const stores = [
+                { name: "App Haven", aboutUs: "App Haven is your one-stop shop for all things Metaverse." },
+                { name: "Virtual Visions", aboutUs: "Virtual Visions brings the future of digital experiences to you." },
+                // Add more stores as needed
+            ];
+
+            // Set up initial app
+            const appInfo = document.querySelector('.app-info');
+            const appName = appInfo.querySelector('#app-name');
+            const addToCartButton = appInfo.querySelector('button[onclick="addToCart(this)"]');
+            const buyButton = appInfo.querySelector('button[onclick="buyApp(this)"]');
+
+            appName.textContent = apps[0].name;
+            addToCartButton.setAttribute('data-url', apps[0].addToCartUrl);
+            buyButton.setAttribute('data-url', apps[0].buyUrl);
+
+            // Set up initial store
+            const storeInfo = document.querySelector('.store-info');
+            const storeName = storeInfo.querySelector('#store-name');
+            storeName.textContent = stores[0].name;
+        }
+
+        // Call setup function when the page loads
+        window.onload = setupPage;
+    </script>
+</body>
+</html>
