@@ -1,162 +1,69 @@
-<html><head><base href="https://meta.appstore.virtual/">
-<meta charset="UTF-8">
-<title>East Land Capital</title>
-<style>
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    overflow: hidden;
-    background: #000;
-}
-#scene-container {
-    width: 100%;
-    height: 100%;
-}
-.ui-panel {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-.app-info, .store-info {
-    display: none;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
-    text-align: center;
-}
-.btn {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-    margin: 5px;
-}
-.btn:hover {
-    background: #45a049;
-    transform: scale(1.05);
-}
-.btn:active {
-    transform: scale(0.95);
-}
-#buttons-panel {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
-}
-.modal-content {
-    background-color: #222;
-    color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-}
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.close:hover,
-.close:focus {
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-}
-#sponsors-list {
-    list-style-type: none;
-    padding: 0;
-}
-#sponsors-list li {
-    margin-bottom: 15px;
-    padding: 10px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 5px;
-}
-#navigation-controls {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.nav-btn {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-.nav-btn:hover {
-    background: rgba(255,255,255,0.4);
-}
-#discord-widget {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
-}
-#eastland-substack {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-}
-#music-controls {
-    position: absolute;
-    top: 20px;
-    right: 340px;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="https://meta.appstore.virtual/">
+    <meta charset="UTF-8">
+    <title>Metaverse App Marketplace with Calm Music</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        #scene-container {
+            width: 100%;
+            height: 100vh;
+            display: block;
+        }
+
+        .ui-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            z-index: 100;
+        }
+
+        .ui-panel h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .app-info,
+        .store-info {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            z-index: 100;
+            display: none;
+        }
+
+        .btn {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 </head>
-<body>
+<body onload="init()">
 <div id="scene-container"></div>
 <div class="ui-panel">
     <h2>Metaverse App Marketplace</h2>
@@ -166,581 +73,105 @@ body, html {
     <h2 id="app-name"></h2>
     <p id="app-description"></p>
     <p id="app-price"></p>
-    <button class="btn" onclick="addToCart()">Add to Cart</button>
+    <button class="btn" id="add-to-cart-btn">Add to Cart</button>
 </div>
 <div class="store-info">
     <h2 id="store-name"></h2>
     <p id="store-description"></p>
-    <button class="btn" onclick="openStoreModal()">Enter Store</button>
+    <button class="btn" id="buy-btn">Buy</button>
 </div>
-<div id="buttons-panel">
-    <button class="btn" onclick="toggleEastlandSubstack()">Register</button>
-    <button class="btn" onclick="openSponsorsModal()">City Sponsors</button>
-    <button class="btn" onclick="redirectToEntertainment()">Entertainment</button>
-    <button class="btn" onclick="toggleDiscord()">Toggle Discord</button>
-</div>
-<div id="navigation-controls">
-    <button class="nav-btn" id="move-forward">⬆</button>
-    <div>
-        <button class="nav-btn" id="move-left">⬅</button>
-        <button class="nav-btn" id="move-right">➡</button>
-    </div>
-    <button class="nav-btn" id="move-backward">⬇</button>
-</div>
-
-<div id="sponsorsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('sponsorsModal')">&times;</span>
-        <h2>City Sponsors and Marketplaces</h2>
-        <ul id="sponsors-list"></ul>
-    </div>
-</div>
-
-<div id="storeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('storeModal')">&times;</span>
-        <h2 id="store-modal-name"></h2>
-        <ul id="store-items"></ul>
-    </div>
-</div>
-
-<iframe id="discord-widget" src="https://discord.com/widget?id=YOUR_DISCORD_SERVER_ID&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="display: none;"></iframe>
-
-<div id="eastland-substack">
-    <iframe src="https://eastland.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
-</div>
-
-<div id="music-controls">
-    <button onclick="toggleMusic()">Toggle Music</button>
-    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5" onchange="setVolume(this.value)">
-</div>
-
-<audio id="background-music" loop>
-    <source src="https://example.com/calm-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
 <script>
-let scene, camera, renderer, raycaster, mouse;
-let appIcons = [];
-let storeBuildings = [];
-let selectedApp = null;
-let selectedStore = null;
-let people = [];
-let adScreens = [];
-let userControls = { moveForward: false, moveBackward: false, moveLeft: false, moveRight: false };
-let userSpeed = 0.5;
-let isSpinning = false;
-let spinningTween;
-let backgroundMusic;
-let isMusicPlaying = false;
+    let scene, camera, renderer;
 
-const apps = [
-    { name: "VirtualMeet", description: "Host virtual meetings in stunning 3D environments", price: 9.99, logo: "🤝", addToCartUrl: "https://metaverse.example.com/cart/add/virtualmeet" },
-    { name: "MetaFit", description: "AI-powered fitness coach in your personal virtual gym", price: 14.99, logo: "💪", addToCartUrl: "https://metaverse.example.com/cart/add/metafit" },
-    { name: "DreamScape", description: "Create and explore surreal landscapes", price: 19.99, logo: "🌈", addToCartUrl: "https://metaverse.example.com/cart/add/dreamscape" },
-    { name: "CryptoVault", description: "Secure blockchain wallet with 3D visualization", price: 24.99, logo: "🔒", addToCartUrl: "https://metaverse.example.com/cart/add/cryptovault" },
-    { name: "EduVerse", description: "Interactive 3D learning experiences", price: 12.99, logo: "🎓", addToCartUrl: "https://metaverse.example.com/cart/add/eduverse" },
-    { name: "GalacticTrade", description: "Intergalactic commerce simulator", price: 29.99, logo: "🚀", addToCartUrl: "https://metaverse.example.com/cart/add/galactictrade" }
-];
-
-const stores = [
-    { name: "TechHub", description: "Cutting-edge gadgets and software", logo: "🖥️", storeUrl: "https://metaverse.example.com/store/techhub", products: [
-        { name: "HoloLens 3", price: 499.99, buyUrl: "https://metaverse.example.com/store/techhub/buy/hololens3" },
-        { name: "NeuroLink Pro", price: 299.99, buyUrl: "https://metaverse.example.com/store/techhub/buy/neurolinkpro" },
-        { name: "Quantum Processor", price: 999.99, buyUrl: "https://metaverse.example.com/store/techhub/buy/quantumprocessor" }
-    ]},
-    { name: "Virtual Fashions", description: "Trendy digital clothing and accessories", logo: "👗", storeUrl: "https://metaverse.example.com/store/virtualfashions", products: [
-        { name: "Neon Jacket", price: 49.99, buyUrl: "https://metaverse.example.com/store/virtualfashions/buy/neonjacket" },
-        { name: "Holographic Shoes", price: 79.99, buyUrl: "https://metaverse.example.com/store/virtualfashions/buy/holographicshoes" },
-        { name: "Pixel Perfect Hat", price: 29.99, buyUrl: "https://metaverse.example.com/store/virtualfashions/buy/pixelperfecthat" }
-    ]},
-    { name: "Digital Pets", description: "Adopt your perfect AI companion", logo: "🐾", storeUrl: "https://metaverse.example.com/store/digitalpets", products: [
-        { name: "RoboDog", price: 199.99, buyUrl: "https://metaverse.example.com/store/digitalpets/buy/robodog" },
-        { name: "Holo-Cat", price: 149.99, buyUrl: "https://metaverse.example.com/store/digitalpets/buy/holocat" },
-        { name: "Pixel Parrot", price: 99.99, buyUrl: "https://metaverse.example.com/store/digitalpets/buy/pixelparrot" }
-    ]}
-];
-
-const citySponsors = [
-    { name: "NeoTech Industries", description: "Pioneering the future of technology", marketplace: "https://neotech.com/marketplace" },
-    { name: "Quantum Dynamics", description: "Revolutionizing quantum computing", marketplace: "https://quantumdynamics.io/store" },
-    { name: "Virtual Realities Inc.", description: "Creating immersive digital experiences", marketplace: "https://vrinc.com/shop" },
-    { name: "EcoSphere Solutions", description: "Sustainable technology for a better tomorrow", marketplace: "https://ecosphere.tech/market" },
-    { name: "Cybernetic Systems", description: "Bridging the gap between human and machine", marketplace: "https://cybersys.ai/products" },
-    { name: "Starlink Innovations", description: "Connecting the metaverse to the stars", marketplace: "https://starlinkinnovations.space/bazaar" }
-];
-
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('scene-container').appendChild(renderer.domElement);
-
-    raycaster = new THREE.Raycaster();
-    mouse = new THREE.Vector2();
-
-    createEnvironment();
-    createLighting();
-    createAppIcons();
-    createFuturisticCity();
-    createPeople();
-    createAdScreens();
-    createStores();
-
-    camera.position.set(0, 5, 50);
-    camera.lookAt(0, 0, 0);
-
-    document.addEventListener('mousemove', onMouseMove, false);
-    document.addEventListener('click', onMouseClick, false);
-    window.addEventListener('resize', onWindowResize, false);
-    
-    setupUserControls();
-    setupBackgroundMusic();
-
-    animate();
-}
-
-function createEnvironment() {
-    const floorGeometry = new THREE.PlaneGeometry(1000, 1000);
-    const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x1a1a1a });
-    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.rotation.x = -Math.PI / 2;
-    scene.add(floor);
-
-    const skyGeometry = new THREE.SphereGeometry(500, 32, 32);
-    const skyMaterial = new THREE.MeshBasicMaterial({ color: 0x000033, side: THREE.BackSide });
-    const sky = new THREE.Mesh(skyGeometry, skyMaterial);
-    scene.add(sky);
-}
-
-function createLighting() {
-    const ambientLight = new THREE.AmbientLight(0x333333);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(5, 10, 5);
-    scene.add(directionalLight);
-
-    const pointLight1 = new THREE.PointLight(0xff00ff, 1, 100);
-    pointLight1.position.set(20, 20, 20);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0x00ffff, 1, 100);
-    pointLight2.position.set(-20, 20, -20);
-    scene.add(pointLight2);
-}
-
-function createAppIcons() {
-    const iconGeometry = new THREE.SphereGeometry(2, 32, 32);
-    
-    apps.forEach((app, index) => {
-        const iconMaterial = new THREE.MeshPhongMaterial({ 
-            color: Math.random() * 0xffffff,
-            emissive: 0x222222,
-            specular: 0xffffff,
-            shininess: 100
-        });
-        const icon = new THREE.Mesh(iconGeometry, iconMaterial);
-        
-        const angle = (index / apps.length) * Math.PI * 2;
-        const radius = 20;
-        icon.position.set(Math.cos(angle) * radius, 10, Math.sin(angle) * radius);
-        
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = canvas.height = 128;
-        context.fillStyle = '#ffffff';
-        context.font = '80px Arial';
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(app.logo, 64, 64);
-        
-        const texture = new THREE.CanvasTexture(canvas);
-        iconMaterial.map = texture;
-        
-        scene.add(icon);
-        appIcons.push(icon);
-    });
-}
-
-function createFuturisticCity() {
-    const cityGroup = new THREE.Group();
-
-    for (let i = 0; i < 100; i++) {
-        const buildingHeight = Math.random() * 100 + 50;
-        const buildingGeometry = new THREE.BoxGeometry(10, buildingHeight, 10);
-        const buildingMaterial = new THREE.MeshPhongMaterial({
-            color: 0x0a0a2a,
-            emissive: new THREE.Color(Math.random(), Math.random(), Math.random()).multiplyScalar(0.2),
-            transparent: true,
-            opacity: 0.8
-        });
-        const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
-
-        building.position.set(
-            Math.random() * 400 - 200,
-            buildingHeight / 2,
-            Math.random() * 400 - 200
-        );
-
-        cityGroup.add(building);
-
-        const windowGeometry = new THREE.PlaneGeometry(0.5, 1);
-        const windowMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-        for (let j = 0; j < 20; j++) {
-            const window = new THREE.Mesh(windowGeometry, windowMaterial);
-            window.position.set(
-                Math.random() * 8 - 4,
-                Math.random() * buildingHeight - buildingHeight / 2,
-                5.01
-            );
-            building.add(window);
+    // Stores and Apps Data
+    const stores = [
+        {
+            name: "Store 1",
+            description: "This store offers the latest VR headsets.",
+            buyUrl: "https://meta.appstore.virtual/store1"
+        },
+        {
+            name: "Store 2",
+            description: "Specialized in VR gloves.",
+            buyUrl: "https://meta.appstore.virtual/store2"
         }
-    }
+        // Add more stores as needed
+    ];
 
-    scene.add(cityGroup);
-}
+    const apps = [
+        {
+            name: "App 1",
+            description: "Explore the universe in this space adventure.",
+            price: "$9.99",
+            cartUrl: "https://meta.appstore.virtual/cart/app1"
+        },
+        {
+            name: "App 2",
+            description: "Challenge your mind with this VR puzzle game.",
+            price: "$4.99",
+            cartUrl: "https://meta.appstore.virtual/cart/app2"
+        }
+        // Add more apps as needed
+    ];
 
-function createPeople() {
-    const personGeometry = new THREE.ConeGeometry(0.5, 2, 8);
-    const personMaterial = new THREE.MeshPhongMaterial({ color: 0xffaa00 });
+    function init() {
+        // Scene setup
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
 
-    for (let i = 0; i < 100; i++) {
-        const person = new THREE.Mesh(personGeometry, personMaterial);
-        person.position.set(
-            Math.random() * 200 - 100,
-            1,
-            Math.random() * 200 - 100
-        );
-        person.userData = {
-            speed: Math.random() * 0.1 + 0.05,
-            direction: new THREE.Vector3(Math.random() - 0.5, 0, Math.random() - 0.5).normalize()
-        };
-        scene.add(person);
-        people.push(person);
-    }
-}
+        // Example geometry
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        camera.position.z = 5;
 
-function createAdScreens() {
-    const screenGeometry = new THREE.PlaneGeometry(10, 6);
-    const screenMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        // Rendering loop
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
 
-    for (let i = 0; i < 10; i++) {
-        const screen = new THREE.Mesh(screenGeometry, screenMaterial);
-        screen.position.set(
-            Math.random() * 180 - 90,
-            20,
-            Math.random() * 180 - 90
-        );
-        screen.lookAt(0, 20, 0);
-        scene.add(screen);
-        adScreens.push(screen);
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = 512;
-        canvas.height = 256;
-        context.fillStyle = '#000000';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.font = 'Bold 40px Arial';
-        context.fillStyle = '#ffffff';
-        context.textAlign = 'center';
-        context.fillText('MetaVerse Apps', canvas.width / 2, canvas.height / 2);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        screen.material.map = texture;
-        screen.material.needsUpdate = true;
-    }
-}
-
-function createStores() {
-    stores.forEach((store, index) => {
-        const storeGeometry = new THREE.BoxGeometry(15, 20, 15);
-        const storeMaterial = new THREE.MeshPhongMaterial({
-            color: 0x00ff00,
-            emissive: 0x002200,
-            transparent: true,
-            opacity: 0.8
+        // Event listeners for interaction
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            window.location.href = selectedApp.cartUrl;
         });
-        const storeBuilding = new THREE.Mesh(storeGeometry, storeMaterial);
 
-        const angle = (index / stores.length) * Math.PI * 2;
-        const radius = 40;
-        storeBuilding.position.set(Math.cos(angle) * radius, 10, Math.sin(angle) * radius);
-
-        // Add lights to the store
-        const storeLight = new THREE.PointLight(0xffffff, 1, 20);
-        storeLight.position.set(0, 15, 0);
-        storeBuilding.add(storeLight);
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = canvas.height = 256;
-        context.fillStyle = '#ffffff';
-        context.font = '120px Arial';
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(store.logo, 128, 128);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        const signGeometry = new THREE.PlaneGeometry(5, 5);
-        const signMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        const sign = new THREE.Mesh(signGeometry, signMaterial);
-        sign.position.set(0, 12, 7.6);
-        storeBuilding.add(sign);
-
-        scene.add(storeBuilding);
-        storeBuildings.push(storeBuilding);
-    });
-}
-
-function onMouseMove(event) {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-}
-
-function onMouseClick(event) {
-    raycaster.setFromCamera(mouse, camera);
-    const intersectsApps = raycaster.intersectObjects(appIcons);
-    const intersectsStores = raycaster.intersectObjects(storeBuildings);
-    
-    if (intersectsApps.length > 0) {
-        const clickedApp = apps[appIcons.indexOf(intersectsApps[0].object)];
-        showAppInfo(clickedApp);
-    } else if (intersectsStores.length > 0) {
-        const clickedStore = stores[storeBuildings.indexOf(intersectsStores[0].object)];
-        showStoreInfo(clickedStore);
-    } else {
-        hideAppInfo();
-        hideStoreInfo();
-    }
-}
-
-function showAppInfo(app) {
-    document.getElementById('app-name').textContent = `${app.logo} ${app.name}`;
-    document.getElementById('app-description').textContent = app.description;
-    document.getElementById('app-price').textContent = `$${app.price.toFixed(2)}`;
-    document.querySelector('.app-info').style.display = 'block';
-    document.querySelector('.store-info').style.display = 'none';
-    selectedApp = app;
-    selectedStore = null;
-}
-
-function showStoreInfo(store) {
-    document.getElementById('store-name').textContent = `${store.logo} ${store.name}`;
-    document.getElementById('store-description').textContent = store.description;
-    document.querySelector('.store-info').style.display = 'block';
-    document.querySelector('.app-info').style.display = 'none';
-    selectedStore = store;
-    selectedApp = null;
-}
-
-function hideAppInfo() {
-    document.querySelector('.app-info').style.display = 'none';
-    selectedApp = null;
-}
-
-function hideStoreInfo() {
-    document.querySelector('.store-info').style.display = 'none';
-    selectedStore = null;
-}
-
-function addToCart() {
-    window.open('https://www.wow.com', '_blank');
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    appIcons.forEach((icon, index) => {
-        icon.rotation.y += 0.01;
-        icon.position.y = Math.sin(Date.now() * 0.001 + index) * 0.5 + 10;
-    });
-
-    people.forEach(person => {
-        person.position.add(person.userData.direction.clone().multiplyScalar(person.userData.speed));
-        person.rotation.y += 0.05;
-
-        if (Math.abs(person.position.x) > 100 || Math.abs(person.position.z) > 100) {
-            person.userData.direction.negate();
-        }
-    });
-
-    adScreens.forEach((screen, index) => {
-        screen.material.color.setHSL((Date.now() * 0.0005 + index * 0.1) % 1, 1, 0.5);
-    });
-
-    storeBuildings.forEach((building, index) => {
-        building.rotation.y += 0.005;
-        building.position.y = Math.sin(Date.now() * 0.001 + index) * 0.5 + 10;
-    });
-
-    updateUserPosition();
-
-    if (isSpinning) {
-        camera.rotation.y += 0.01;
-    }
-
-    renderer.render(scene, camera);
-}
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-}
-
-function toggleEastlandSubstack() {
-    const eastlandSubstack = document.getElementById('eastland-substack');
-    if (eastlandSubstack.style.display === 'none') {
-        eastlandSubstack.style.display = 'block';
-    } else {
-        eastlandSubstack.style.display = 'none';
-    }
-}
-
-function openSponsorsModal() {
-    const sponsorsList = document.getElementById('sponsors-list');
-    sponsorsList.innerHTML = '';
-    citySponsors.forEach(sponsor => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <strong>${sponsor.name}</strong><br>
-            ${sponsor.description}<br>
-            <a href="${sponsor.marketplace}" target="_blank">Visit Marketplace</a>
-        `;
-        sponsorsList.appendChild(li);
-    });
-    openModal('sponsorsModal');
-}
-
-function redirectToEntertainment() {
-    window.open('https://www.wow.com', '_blank');
-}
-
-function openStoreModal() {
-    if (selectedStore) {
-        document.getElementById('store-modal-name').textContent = `${selectedStore.logo} ${selectedStore.name}`;
-        const storeItems = document.getElementById('store-items');
-        storeItems.innerHTML = '';
-        selectedStore.products.forEach(product => {
-            const li = document.createElement('li');
-            li.textContent = `${product.name} - $${product.price.toFixed(2)}`;
-            const buyBtn = document.createElement('button');
-            buyBtn.textContent = 'Buy';
-            buyBtn.onclick = () => buyProduct(product);
-            li.appendChild(buyBtn);
-            storeItems.appendChild(li);
+        document.getElementById('buy-btn').addEventListener('click', function() {
+            window.location.href = selectedStore.buyUrl;
         });
-        openModal('storeModal');
     }
-}
 
-function buyProduct(product) {
-    window.open('https://www.wow.com', '_blank');
-}
+    let selectedStore = stores[0];
+    let selectedApp = apps[0];
 
-function setupUserControls() {
-    document.getElementById('move-forward').addEventListener('mousedown', () => { userControls.moveForward = true; stopSpinning(); startMusic(); });
-    document.getElementById('move-forward').addEventListener('mouseup', () => { userControls.moveForward = false; startSpinning(); });
-    document.getElementById('move-backward').addEventListener('mousedown', () => { userControls.moveBackward = true; stopSpinning(); startMusic(); });
-    document.getElementById('move-backward').addEventListener('mouseup', () => { userControls.moveBackward = false; startSpinning(); });
-    document.getElementById('move-left').addEventListener('mousedown', () => { userControls.moveLeft = true; stopSpinning(); startMusic(); });
-    document.getElementById('move-left').addEventListener('mouseup', () => { userControls.moveLeft = false; startSpinning(); });
-    document.getElementById('move-right').addEventListener('mousedown', () => { userControls.moveRight = true; stopSpinning(); startMusic(); });
-    document.getElementById('move-right').addEventListener('mouseup', () => { userControls.moveRight = false; startSpinning(); });
-
-    document.addEventListener('keydown', (event) => {
-        switch(event.key) {
-            case 'w': userControls.moveForward = true; stopSpinning(); startMusic(); break;
-            case 's': userControls.moveBackward = true; stopSpinning(); startMusic(); break;
-            case 'a': userControls.moveLeft = true; stopSpinning(); startMusic(); break;
-            case 'd': userControls.moveRight = true; stopSpinning(); startMusic(); break;
-        }
-    });
-
-    document.addEventListener('keyup', (event) => {
-        switch(event.key) {
-            case 'w': userControls.moveForward = false; startSpinning(); break;
-            case 's': userControls.moveBackward = false; startSpinning(); break;
-            case 'a': userControls.moveLeft = false; startSpinning(); break;
-            case 'd': userControls.moveRight = false; startSpinning(); break;
-        }
-    });
-}
-
-function updateUserPosition() {
-    const moveDistance = userSpeed;
-    if (userControls.moveForward) camera.position.z -= moveDistance;
-    if (userControls.moveBackward) camera.position.z += moveDistance;
-    if (userControls.moveLeft) camera.position.x -= moveDistance;
-    if (userControls.moveRight) camera.position.x += moveDistance;
-
-    // Ensure the camera stays within bounds
-    camera.position.x = Math.max(-100, Math.min(100, camera.position.x));
-    camera.position.z = Math.max(-100, Math.min(100, camera.position.z));
-}
-
-function startSpinning() {
-    if (!isMoving()) {
-        isSpinning = true;
+    function showStoreInfo(storeIndex) {
+        selectedStore = stores[storeIndex];
+        document.getElementById('store-name').innerText = selectedStore.name;
+        document.getElementById('store-description').innerText = selectedStore.description;
+        document.getElementById('buy-btn').style.display = 'block';
+        document.querySelector('.store-info').style.display = 'block';
     }
-}
 
-function stopSpinning() {
-    isSpinning = false;
-}
-
-function isMoving() {
-    return userControls.moveForward || userControls.moveBackward || userControls.moveLeft || userControls.moveRight;
-}
-
-function toggleDiscord() {
-    const discordWidget = document.getElementById('discord-widget');
-    if (discordWidget.style.display === 'none') {
-        discordWidget.style.display = 'block';
-    } else {
-        discordWidget.style.display = 'none';
+    function showAppInfo(appIndex) {
+        selectedApp = apps[appIndex];
+        document.getElementById('app-name').innerText = selectedApp.name;
+        document.getElementById('app-description').innerText = selectedApp.description;
+        document.getElementById('app-price').innerText = selectedApp.price;
+        document.getElementById('add-to-cart-btn').style.display = 'block';
+        document.querySelector('.app-info').style.display = 'block';
     }
-}
 
-function setupBackgroundMusic() {
-    backgroundMusic = document.getElementById('background-music');
-    backgroundMusic.volume = 0.5;
-}
+    // Example to show store/app info (replace with actual logic)
+    showStoreInfo(0); // Show info for the first store
+    showAppInfo(0);   // Show info for the first app
 
-function startMusic() {
-    if (!isMusicPlaying) {
-        backgroundMusic.play();
-        isMusicPlaying = true;
-    }
-}
-
-function toggleMusic() {
-    if (isMusicPlaying) {
-        backgroundMusic.pause();
-        isMusicPlaying = false;
-    } else {
-        backgroundMusic.play();
-        isMusicPlaying = true;
-    }
-}
-
-function setVolume(volume) {
-    backgroundMusic.volume = volume;
-}
-
-init();
 </script>
 </body>
 </html>
