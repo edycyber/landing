@@ -73,46 +73,15 @@
     <h2 id="app-name"></h2>
     <p id="app-description"></p>
     <p id="app-price"></p>
-    <button class="btn" id="add-to-cart-btn">Add to Cart</button>
+    <button class="btn" id="add-to-cart-btn" onclick="window.location.href='https://meta.appstore.virtual/cart/app1'">Add to Cart</button>
 </div>
 <div class="store-info">
     <h2 id="store-name"></h2>
     <p id="store-description"></p>
-    <button class="btn" id="buy-btn">Buy</button>
+    <button class="btn" id="buy-btn" onclick="window.location.href='https://meta.appstore.virtual/store1'">Buy</button>
 </div>
 <script>
     let scene, camera, renderer;
-
-    // Stores and Apps Data
-    const stores = [
-        {
-            name: "Store 1",
-            description: "This store offers the latest VR headsets.",
-            buyUrl: "https://meta.appstore.virtual/store1"
-        },
-        {
-            name: "Store 2",
-            description: "Specialized in VR gloves.",
-            buyUrl: "https://meta.appstore.virtual/store2"
-        }
-        // Add more stores as needed
-    ];
-
-    const apps = [
-        {
-            name: "App 1",
-            description: "Explore the universe in this space adventure.",
-            price: "$9.99",
-            cartUrl: "https://meta.appstore.virtual/cart/app1"
-        },
-        {
-            name: "App 2",
-            description: "Challenge your mind with this VR puzzle game.",
-            price: "$4.99",
-            cartUrl: "https://meta.appstore.virtual/cart/app2"
-        }
-        // Add more apps as needed
-    ];
 
     function init() {
         // Scene setup
@@ -137,41 +106,7 @@
             renderer.render(scene, camera);
         }
         animate();
-
-        // Event listeners for interaction
-        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
-            window.location.href = selectedApp.cartUrl;
-        });
-
-        document.getElementById('buy-btn').addEventListener('click', function() {
-            window.location.href = selectedStore.buyUrl;
-        });
     }
-
-    let selectedStore = stores[0];
-    let selectedApp = apps[0];
-
-    function showStoreInfo(storeIndex) {
-        selectedStore = stores[storeIndex];
-        document.getElementById('store-name').innerText = selectedStore.name;
-        document.getElementById('store-description').innerText = selectedStore.description;
-        document.getElementById('buy-btn').style.display = 'block';
-        document.querySelector('.store-info').style.display = 'block';
-    }
-
-    function showAppInfo(appIndex) {
-        selectedApp = apps[appIndex];
-        document.getElementById('app-name').innerText = selectedApp.name;
-        document.getElementById('app-description').innerText = selectedApp.description;
-        document.getElementById('app-price').innerText = selectedApp.price;
-        document.getElementById('add-to-cart-btn').style.display = 'block';
-        document.querySelector('.app-info').style.display = 'block';
-    }
-
-    // Example to show store/app info (replace with actual logic)
-    showStoreInfo(0); // Show info for the first store
-    showAppInfo(0);   // Show info for the first app
-
 </script>
 </body>
 </html>
