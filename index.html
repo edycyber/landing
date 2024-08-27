@@ -247,6 +247,22 @@
         border-radius: 5px;
         cursor: pointer;
     }
+        /* Button styling */
+    .styled-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #5FC2BA;
+        color: #0B162C;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .styled-button:hover {
+        background-color: #3B556D;
+        color: #ffffff;
+    }
     </style>
 </head>
 
@@ -276,7 +292,7 @@
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Stay updated with the latest from Eastland Capital. Join our Substack newsletter!</p>
                 <a href="https://substack.com" target="_blank">Visit our Substack</a>
-                <button class="close-popup" onclick="closePopup()">Close</button>
+                <button class="styled-button" onclick="openPopup()">Subscribe</button>
             </div>
         </div>
     </section>
@@ -325,7 +341,7 @@
             <p>Contact us at <a href="mailto:info@eastlandcapital.com">info@eastlandcapital.com</a></p>
             <p>© 2024 Eastland Capital. All rights reserved.</p>
         </div>
-        <button onclick="openPopup()">Subscribe</button>
+        <button class="styled-button" onclick="openPopup()">Subscribe</button>
     </footer>
 <script>
     function openPopup() {
