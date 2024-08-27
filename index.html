@@ -200,6 +200,52 @@
             color: #0B162C;
             cursor: pointer;
         }
+        /* Popup styling */
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background-color: #1C2942;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+    }
+
+    .popup-content h2 {
+        color: #5FC2BA;
+    }
+
+    .popup-content a {
+        color: #5FC2BA;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .popup-content a:hover {
+        text-decoration: underline;
+    }
+
+    .close-popup {
+        background-color: #5FC2BA;
+        color: #0B162C;
+        padding: 10px 20px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
     </style>
 </head>
 
@@ -224,6 +270,15 @@
         <h2>Innovative Software Solutions</h2>
         <p>Your partner in cutting-edge software development.</p>
         <a href="#products" class="cta-button">Explore Our Products</a>
+        <!-- Add this after the subscribe button in the hero section -->
+<div id="popup-overlay" class="popup-overlay">
+    <div class="popup-content">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with the latest from Eastland Capital. Join our Substack newsletter!</p>
+        <a href="https://substack.com" target="_blank">Visit our Substack</a>
+        <button class="close-popup" onclick="closePopup()">Close</button>
+    </div>
+</div>
     </section>
 
     <!-- Product 1 -->
@@ -275,7 +330,16 @@
             <input type="submit" value="Subscribe">
         </form>
     </footer>
+<script>
+    function openPopup() {
+        document.getElementById('popup-overlay').style.display = 'flex';
+    }
 
+    function closePopup() {
+        document.getElementById('popup-overlay').style.display = 'none';
+    }
+</script>
+    
 </body>
 
 </html>
